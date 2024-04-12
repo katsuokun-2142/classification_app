@@ -49,7 +49,7 @@ erDiagram
 | ------------------ | ------- | ----------- |
 | category_name      | string  | null: false |
 
-#### Association※未定義
+#### Association
 
 - has_many :web_site_info
 
@@ -62,7 +62,7 @@ erDiagram
 | summary_text             | text       | null: false |
 | site_URL                 | text       | null: false |
 
-#### Association※未定義
+#### Association
 
 - belongs_to :category
 - has_many :sub_category, through: :sinfo_scategory
@@ -75,7 +75,7 @@ erDiagram
 | web_site_info | references | null: false, foreign_key: true |
 | sub_category  | references | null: false, foreign_key: true |
 
-#### Association※未定義
+#### Association
 
 - belongs_to :web_site_info
 - belongs_to :sub_category
@@ -86,7 +86,7 @@ erDiagram
 | -------------- | ---- | ----------- |
 | scategory_name | text | null: false |
 
-#### Association※未定義
+#### Association
 
 - has_many :web_site_info, through: :sinfo_scategory
 - has_many :sinfo_scategory
