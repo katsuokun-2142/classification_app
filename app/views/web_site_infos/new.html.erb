@@ -1,4 +1,4 @@
-<%= form_with model: @hoge, local: true do |f| %>
+<%= form_with model: @category_web_site_info, url: web_site_infos_path, local: true do |f| %>
   <%= f.text_field :site_URL, class:"hoge", id:"1", placeholder:"例）https://○○○○" %>
   <%= f.submit "登録する" ,class:"hoge" %>
 <% end %>
