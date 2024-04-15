@@ -29,11 +29,12 @@ class WebSiteInfosController < ApplicationController
       additional_params: {
         category_name: hash_summary[:category],
         site_title: ScrapingHtml.get_title(str_URL),
-        summary_text: hash_summary[:summary_text]
+        summary_text: hash_summary[:summary_text],
+        scategory_names: hash_summary[:sub_categories]
       }
     })
     # 新しいパラメータをrequireおよびpermitして、安全に使用できるようにする
-    permitted_additional_params = additional_params.require(:additional_params).permit(:category_name, :site_title, :summary_text)
+    permitted_additional_params = additional_params.require(:additional_params).permit(:category_name, :site_title, :summary_text, scategory_names: [])
 
     # 既存のparamsに新しいパラメータをマージ
     params.require(:category_web_site_info).permit(:site_URL).merge(permitted_additional_params)

@@ -16,7 +16,7 @@ class ChatGptService
               # content: "あなたは優秀なアシスタントです。あなたはあらゆるジャンルのクイズを作ることが出来ます。日本語で回答してください。lang:ja。{questions: [{question: '問題', options:['回答1', '回答2', '回答3', '回答4'], answerIndex: 0},...]}のJSON形式で返却してください。"
               # content: "You are an excellent assistant. Please answer in Japanese and return in JSON format with {message: 'message'}."
               content: "You are an excellent assistant. You can categorize the content of any site. You may also summarize the site in 140 characters or less. Please provide no more than 3 subcategories of output.
-                        Please answer in Japanese and return in JSON format with {category: 'category', summary_text: 'summary text', sub_category: ['sub_category1', 'sub_category2', 'sub_category3']}."
+                        Please answer in Japanese and return in JSON format with {category: 'category', summary_text: 'summary text', sub_categories: ['sub_category1', 'sub_category2', 'sub_category3']}."
           },
           {
               role: "user",
