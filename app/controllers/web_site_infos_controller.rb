@@ -1,4 +1,4 @@
-class WebSiteInfoController < ApplicationController
+class WebSiteInfosController < ApplicationController
   def index
   end
 
