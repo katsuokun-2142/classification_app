@@ -22,11 +22,14 @@ class WebSiteInfosController < ApplicationController
 
   def category_web_site_info_params
     # 外部APIから取得したデータや、その他のソースからのデータを含む新しいパラメータを作成
+    str_URL = params.require(:category_web_site_info)[:site_URL]
+    chatGPT = ChatGptService.new
+    hash_summary = chatGPT.chat(str_URL)
     additional_params = ActionController::Parameters.new({
       additional_params: {
-        category_name: 'APIから取得したカテゴリ名',
-        site_title: ScrapingHtml.get_title(params.require(:category_web_site_info)[:site_URL]),
-        summary_text: 'APIから取得した要約テキスト'
+        category_name: hash_summary[:category],
+        site_title: ScrapingHtml.get_title(str_URL),
+        summary_text: hash_summary[:summary_text]
       }
     })
     # 新しいパラメータをrequireおよびpermitして、安全に使用できるようにする
