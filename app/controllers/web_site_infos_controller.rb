@@ -7,6 +7,14 @@ class WebSiteInfosController < ApplicationController
   end
 
   def create
+    # URLをチェック
+    if UrlChecker.check_url(params.require(:category_web_site_info)[:site_URL]) == false
+      @category_web_site_info = CategoryWebSiteInfo.new
+      @category_web_site_info.errors.add(:base, 'URLのリンクが切れています。')
+      render :new, status: :unprocessable_entity
+      return
+    end
+
     @category_web_site_info = CategoryWebSiteInfo.new(category_web_site_info_params)
     if @category_web_site_info.valid?
       # カテゴリとサイト情報の登録
