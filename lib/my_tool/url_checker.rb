@@ -25,13 +25,13 @@ module UrlChecker
       true
     when Net::HTTPRedirection then
       new_location = response['location']
-      Rails.logger "redirected to #{new_location}"
+      Rails.logger.error "redirected to #{new_location}"
       check_url(new_location, limit - 1) # 再帰的にリダイレクトを追跡
     else
       false
     end
   rescue => e
-    Rails.logger "Error checking URL: #{e.message}"
+    Rails.logger.error "Error checking URL: #{e.message}"
     false
   end
 end

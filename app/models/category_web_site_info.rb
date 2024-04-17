@@ -11,14 +11,16 @@ class CategoryWebSiteInfo
     # カテゴリ
     validates :category_name
     # サイト情報
-    validates :site_title,    length: { in: 1..200, message: 'is invalid. 100 characters max.' }
-    validates :summary_text,  length: { in: 1..280, message: 'is invalid. 140 characters max.' }
+    validates :site_title,    length: { in: 0..200, message: 'is invalid. 100 characters max.' }
+    validates :summary_text,  length: { in: 0..280, message: 'is invalid. 140 characters max.' }
     validates :site_URL,      format: { with: %r{\Ahttp://|\Ahttps://}, message: 'is invalid.' }
     # サブカテゴリ
     validates :scategory_names
   end
   # URLの一意性確認
   validate :sURL_must_be_unique
+  # URLのリンクチェック
+  validate :validate_url
 
   def save
     # カテゴリを保存し、変数categoryに代入する
@@ -52,6 +54,12 @@ class CategoryWebSiteInfo
     if WebSiteInfo.exists?(site_URL: site_URL)
     # if WebSiteInfo.exists?(:site_URL)
         errors.add(:base, 'すでに登録されています。')
+    end
+  end
+
+  def validate_url
+    unless UrlChecker.check_url(site_URL)
+      errors.add(:base, '提供されたURLは無効またはリンクが切れています。')
     end
   end
 end
