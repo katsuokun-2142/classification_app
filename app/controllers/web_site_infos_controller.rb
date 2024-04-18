@@ -1,6 +1,7 @@
 class WebSiteInfosController < ApplicationController
   before_action :validate_url, only: [:create]
   def index
+    @web_site_infos = WebSiteInfo.includes(:category).all
   end
 
   def new
