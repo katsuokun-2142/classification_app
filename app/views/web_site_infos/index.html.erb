@@ -1,1 +1,37 @@
-<%= link_to 'お気入り登録', new_web_site_info_path, class: 'hoge' %>
+<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="index-tab" data-bs-toggle="tab" data-bs-target="#index-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+      一覧
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="category-tab" data-bs-toggle="tab" data-bs-target="#category-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+      カテゴリ
+    </button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="index-tab-pane" role="tabpanel" aria-labelledby="index-tab" tabindex="0">
+    <% @web_site_infos.each do |web_site_info| %>
+    <div class="card mb-3">
+      <h5 class="card-header">
+        <%= web_site_info.category.category_name %>
+        <% web_site_info.sub_categories.each do |sub_category| %>
+        <span class="badge text-bg-info"><%= sub_category.scategory_name %></span>
+        <% end %>
+      </h5>
+      <div class="card-body">
+        <h5 class="card-title"><%= web_site_info.site_title %></h5>
+        <p class="card-text"><%= web_site_info.summary_text %></p>
+        <%= link_to 'リンク先', web_site_info.site_URL, class: "btn btn-primary", target: :_blank, rel: "noopener noreferrer" %>
+      </div>
+    </div>
+    <% end %>
+    <%= paginate @web_site_infos, theme: 'bootstrap-5' %>
+  </div>
+
+  <div class="tab-pane fade" id="category-tab-pane" role="tabpanel" aria-labelledby="category-tab" tabindex="0">
+    ...
+  </div>
+
+</div>

@@ -1,6 +1,8 @@
 class WebSiteInfosController < ApplicationController
   before_action :validate_url, only: [:create]
   def index
+    # @web_site_infos = WebSiteInfo.includes(:category).all
+    @web_site_infos = WebSiteInfo.includes(:category).includes(:sub_categories).order("created_at DESC").page(params[:page])
   end
 
   def new
