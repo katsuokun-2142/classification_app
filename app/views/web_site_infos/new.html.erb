@@ -1,4 +1,15 @@
-<%= form_with model: @category_web_site_info, url: web_site_infos_path, local: true do |f| %>
-  <%= f.text_field :site_URL, class:"hoge", id:"1", placeholder:"例）https://○○○○" %>
-  <%= f.submit "登録する" ,class:"hoge" %>
-<% end %>
+<div class="d-flex justify-content-center align-items-center" style="height: calc(100vh - 56px);">
+<div class="card">
+  <h5 class="card-header">お気入り登録</h5>
+  <div class="card-body">
+    <%= form_with model: @category_web_site_info, url: web_site_infos_path, local: true do |f| %>
+      <label for="inputURL" class="form-label">URL</label>
+      <%= f.text_field :site_URL, class:"form-control", id:"inputURL", placeholder:"例）https://○○○○" %>
+      <p class="form-text help-block">
+        ※chatGPTによるカテゴリ分けやサイト要約を行うため、間違いを犯す可能性があります。重要な情報を確認するようにしてください。
+      </p>
+      <%= f.submit "登録する" ,class:"btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+</div>

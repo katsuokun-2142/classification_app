@@ -1,4 +1,4 @@
 class SubCategory < ApplicationRecord
-  has_many :web_site_info,    through:   :sinfo_scategory
-  has_many :sinfo_scategory,  dependent: :destroy
+  has_many :sinfo_scategories,  dependent: :destroy
+  has_many :web_site_infos,    through:   :sinfo_scategories
 end
