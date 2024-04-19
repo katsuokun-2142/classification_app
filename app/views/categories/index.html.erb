@@ -1,0 +1,33 @@
+<div class="accordion accordion-flush border mb-3" id="accordionPanelsStayOpenExample">
+  <% @categories.each do |category| %>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target=<%= "#panelsStayOpen-collapse#{category.id}" %> aria-expanded="false" aria-controls=<%= "panelsStayOpen-collapse#{category.id}" %>>
+        <%= category.category_name %>
+      </button>
+    </h2>
+    <div id=<%= "panelsStayOpen-collapse#{category.id}" %> class="accordion-collapse collapse">
+      <div class="accordion-body">
+        <% category.web_site_infos.each do |web_site_info| %>
+        <div class="card mb-3" id=<%= "card-id-#{web_site_info.id}" %>>
+          <h5 class="card-header">
+            <% web_site_info.sub_categories.each do |sub_category| %>
+            <span class="badge text-bg-info"><%= sub_category.scategory_name %></span>
+            <% end %>
+          </h5>
+          <div class="card-body">
+            <h5 class="card-title"><%= web_site_info.site_title %></h5>
+            <p class="card-text"><%= web_site_info.summary_text %></p>
+            <div class="d-flex mb-3">
+              <%= link_to 'リンク先', web_site_info.site_URL, class: "btn btn-primary me-auto", target: :_blank, rel: "noopener noreferrer" %>
+              <%= link_to '削除', web_site_info_path(web_site_info.id), class: "btn btn-secondary btn-sm pt-2", data: { turbo_method: :delete } %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= paginate @categories, theme: 'bootstrap-5' %>

@@ -21,6 +21,11 @@ class WebSiteInfosController < ApplicationController
     end
   end
 
+  def destroy
+    web_site_info = WebSiteInfo.find(params[:id])
+    web_site_info.destroy
+  end
+
   private
 
   def category_web_site_info_params
