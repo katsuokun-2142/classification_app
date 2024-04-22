@@ -5,37 +5,40 @@ function web_site_info (){
   deleteButtons.forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
-      const webSiteInfoId = this.dataset.webSiteInfoId;
-      const webSiteInfoElement = document.getElementById(`webSiteInfo_${webSiteInfoId}`);
-      // Fetch APIを使用してサーバーに削除リクエストを送信
-      fetch(`/web_site_infos/${webSiteInfoId}`, {
-        method: 'DELETE',
-        headers: {
-          'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-        },
-        credentials: 'include'
-      })
-      .then(response => {
-        if (response.ok) {
-          // 削除が成功した場合、要素をDOMから削除
-          webSiteInfoElement.remove();
-          const remainingItems = document.querySelectorAll('.delete-button'); // .delete-buttonは各アイテムにつけられたクラス
-          if (remainingItems.length === 0) {
-            // アイテムが0になったら、前のページに移動
-            const currentPageNumber = parseInt(new URLSearchParams(window.location.search).get('page'), 10);
-            if (currentPageNumber && currentPageNumber > 1) {
-              const previousPageNumber = currentPageNumber - 1;
-              window.location.search = `?page=${previousPageNumber}`;
+      let result = window.confirm('本当に削除してもよろしいですか？');
+      if (result) {
+        const webSiteInfoId = this.dataset.webSiteInfoId;
+        const webSiteInfoElement = document.getElementById(`webSiteInfo_${webSiteInfoId}`);
+        // Fetch APIを使用してサーバーに削除リクエストを送信
+        fetch(`/web_site_infos/${webSiteInfoId}`, {
+          method: 'DELETE',
+          headers: {
+            'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+          },
+          credentials: 'include'
+        })
+        .then(response => {
+          if (response.ok) {
+            // 削除が成功した場合、要素をDOMから削除
+            webSiteInfoElement.remove();
+            const remainingItems = document.querySelectorAll('.delete-button'); // .delete-buttonは各アイテムにつけられたクラス
+            if (remainingItems.length === 0) {
+              // アイテムが0になったら、前のページに移動
+              const currentPageNumber = parseInt(new URLSearchParams(window.location.search).get('page'), 10);
+              if (currentPageNumber && currentPageNumber > 1) {
+                const previousPageNumber = currentPageNumber - 1;
+                window.location.search = `?page=${previousPageNumber}`;
+              }
+              if (currentPageNumber <= 1) {
+                window.location.search = '?page=1';
+              }
             }
-            if (currentPageNumber <= 1) {
-              window.location.search = '?page=1';
-            }
+          } else {
+            alert('Something went wrong.');
           }
-        } else {
-          alert('Something went wrong.');
-        }
-      })
-      .catch(error => console.error('Error:', error));
+        })
+        .catch(error => console.error('Error:', error));
+      }
     });
   });
  };
