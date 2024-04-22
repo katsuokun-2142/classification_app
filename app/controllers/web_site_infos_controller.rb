@@ -14,11 +14,15 @@ class WebSiteInfosController < ApplicationController
     if @category_web_site_info.valid?
       # カテゴリとサイト情報の登録
       @category_web_site_info.save
-      # redirect_to root_path
-      redirect_to root_path, notice: 'サイト情報が正常に登録されました。'
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    web_site_info = WebSiteInfo.find(params[:id])
+    web_site_info.destroy
   end
 
   private
@@ -30,11 +34,15 @@ class WebSiteInfosController < ApplicationController
   def validate_url
     site_url = params.require(:category_web_site_info)[:site_URL]
     unless UrlChecker.check_url(site_url)
-      redirect_to new_web_site_info_path, alert: '提供されたURLは無効またはリンクが切れています。'
+      @category_web_site_info = CategoryWebSiteInfo.new
+      @category_web_site_info.errors.add(:base, 'The URL provided is invalid or the link is broken.')
+      render :new, status: :unprocessable_entity
     end
   rescue => e
     Rails.logger.error "URL validation error: #{e.message}"
-    redirect_to new_web_site_info_path, alert: 'URLの検証中にエラーが発生しました。'
+    @category_web_site_info = CategoryWebSiteInfo.new
+    @category_web_site_info.errors.add(:base, 'An error occurred while validating the URL.')
+    render :new, status: :unprocessable_entity
   end
 
   def additional_params

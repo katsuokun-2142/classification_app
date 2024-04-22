@@ -17,7 +17,7 @@ class ChatGptService
                       Please provide no more than 3 subcategories of output.
                       Please answer in Japanese and return in JSON 
                       format with {category: 'category', summary_text: 'summary text', sub_categories: ['sub_category1', 'sub_category2', 'sub_category3']}.
-                      If you can't classify or summarize return `{category: 'その他', summary_text: 'Could not summarize', sub_categories: 'その他'}`."
+                      If you can't classify or summarize return `{category: 'その他', summary_text: 'Could not summarize', sub_categories: ['その他']}`."
           },
           {
             role: 'user',

@@ -1,8 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <%= link_to "分類くん", root_path, class: "navbar-brand ms-3" %>
-  <% unless controller_name == 'web_site_infos' && action_name == 'new' %>
-  <div class="container-fluid justify-content-center">
-    <%= link_to "お気に入り登録", new_web_site_info_path, {class: "btn btn-primary", role: "button"} %>
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href=<%= root_path %>>分類くん</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <%= header_link_item('一覧', root_path) %>
+        <%= header_link_item('カテゴリ', categories_path) %>
+        <%= header_link_item('お気入り登録', new_web_site_info_path) %>
+      </ul>
+    </div>
   </div>
-  <% end %>
 </nav>

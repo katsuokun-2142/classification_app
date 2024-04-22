@@ -46,6 +46,9 @@ class CategoryWebSiteInfo
     array_scategory.each do |sub_category_id|
       SinfoScategory.create(web_site_info_id: web_site_info.id, sub_category_id: sub_category_id)
     end
+  rescue => e
+    Rails.logger.error "save error: #{e.message}"
+    errors.add(:base, 'An unexpected error has occurred.')
   end
 
   private
@@ -53,13 +56,13 @@ class CategoryWebSiteInfo
   def sURL_must_be_unique
     if WebSiteInfo.exists?(site_URL: site_URL)
     # if WebSiteInfo.exists?(:site_URL)
-        errors.add(:base, 'すでに登録されています。')
+        errors.add(:base, 'It has already been registered.')
     end
   end
 
   def validate_url
     unless UrlChecker.check_url(site_URL)
-      errors.add(:base, '提供されたURLは無効またはリンクが切れています。')
+      errors.add(:base, 'The URL provided is invalid or a broken link.')
     end
   end
 end
