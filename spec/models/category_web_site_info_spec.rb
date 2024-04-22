@@ -17,14 +17,14 @@ RSpec.describe CategoryWebSiteInfo, type: :model do
       it 'URLがリンク切れの場合、保存できないこと' do
         @category_web_site_info.site_URL = "http://abcdefg"
         @category_web_site_info.valid?
-        expect(@category_web_site_info.errors.full_messages).to include("提供されたURLは無効またはリンクが切れています。")
+        expect(@category_web_site_info.errors.full_messages).to include("The URL provided is invalid or a broken link.")
         sleep 0.5
       end
       it 'URLが登録済みの場合、保存できないこと' do
         another_category_web_site_info = FactoryBot.build(:category_web_site_info)
         another_category_web_site_info.save
         @category_web_site_info.valid?
-        expect(@category_web_site_info.errors.full_messages).to include('すでに登録されています。')
+        expect(@category_web_site_info.errors.full_messages).to include('It has already been registered.')
         sleep 0.5
       end
       it 'カテゴリ名がない場合、保存できないこと' do
