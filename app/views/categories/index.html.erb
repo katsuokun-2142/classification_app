@@ -1,6 +1,3 @@
-<script type="module">
-  import "category"
-</script>
 <div class="accordion accordion-flush border mb-3" id="accordionPanelsStayOpenExample">
   <% @categories.each do |category| %>
   <div class="accordion-item accordion-category" id=<%= "category_#{category.id}" %>>
@@ -24,7 +21,7 @@
             <div class="d-flex mb-3">
               <%= link_to 'リンク先', web_site_info.site_URL, class: "btn btn-primary me-auto", target: :_blank, rel: "noopener noreferrer" %>
               <%# = link_to '削除', web_site_info_path(web_site_info.id), class: "btn btn-secondary btn-sm pt-2", data: { turbo_method: :delete } %>
-              <button class="btn btn-secondary btn-sm delete-button" data-web-site-info-id=<%= web_site_info.id %> data-category-id=<%= category.id %>>削除</button>
+              <button class="btn btn-secondary btn-sm category-delete-button" data-web-site-info-id=<%= web_site_info.id %> data-category-id=<%= category.id %>>削除</button>
             </div>
           </div>
         </div>

@@ -4,3 +4,5 @@
 //= require bootstrap-sprockets
 import "@hotwired/turbo-rails"
 import "controllers"
+import 'category'
+import 'web_site_info'

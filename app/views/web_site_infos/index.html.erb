@@ -1,6 +1,3 @@
-<script type="module">
-  import "web_site_info"
-</script>
 <% @web_site_infos.each do |web_site_info| %>
 <div class="card mb-3" id=<%= "webSiteInfo_#{web_site_info.id}" %>>
   <h5 class="card-header">
@@ -16,7 +13,7 @@
       <%= link_to 'リンク先', web_site_info.site_URL, class: "btn btn-primary me-auto", target: :_blank, rel: "noopener noreferrer" %>
       <%# = link_to '削除', web_site_info_path(web_site_info.id), class: "btn btn-secondary btn-sm pt-2", id: "card-delete-#{web_site_info.id}", data: { turbo_method: :delete, confirm: '本当に削除しますか？' } %>
       <%# = link_to '削除', web_site_info_path(web_site_info.id), class: "btn btn-secondary btn-sm pt-2 delete-button", "data-web-site-info-id" => "#{web_site_info.id}" %>
-      <button class="btn btn-secondary btn-sm delete-button" data-web-site-info-id=<%= web_site_info.id %>>削除</button>
+      <button class="btn btn-secondary btn-sm site-delete-button" data-web-site-info-id=<%= web_site_info.id %>>削除</button>
     </div>
 
   </div>
